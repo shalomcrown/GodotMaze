@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bup6nfj6vruet"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_penv1"]
+[ext_resource type="PackedScene" uid="uid://f3kvbhwkd3ue" path="res://wall.tscn" id="1_u1u4t"]
+
+[sub_resource type="Sky" id="Sky_1426w"]
+
+[sub_resource type="Environment" id="Environment_253ib"]
+sky = SubResource("Sky_1426w")
+ambient_light_color = Color(0.27451, 0.576471, 0.92549, 1)
+reflected_light_source = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boblo"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5xya"]
+albedo_color = Color(0.537255, 0.647059, 0.835294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rhirr"]
+material = SubResource("StandardMaterial3D_n5xya")
+size = Vector3(50, 0.2, 50)
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_penv1")
+wall_scene = ExtResource("1_u1u4t")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_253ib")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_boblo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+custom_aabb = AABB(0, 0, 0, 1, 1, 1)
+mesh = SubResource("BoxMesh_rhirr")
+
+[node name="CheatCameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0827561, 0.99657, 0, -0.99657, 0.0827561, -0.470027, 29.5015, 3.0682)
+
+[node name="CheatCamera" type="Camera3D" parent="CheatCameraPivot"]
+fov = 101.1
+
+[node name="MainLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.793438, 0.608651, 0, -0.608651, 0.793438, 0, 50, 0)
+light_energy = 1.97
+shadow_enabled = true
+
+[node name="MainCameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MainCamera" type="Camera3D" parent="MainCameraPivot"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://f3kvbhwkd3ue"]
+
+[ext_resource type="Texture2D" uid="uid://ragnu372cyet" path="res://Art/gray-granite-flecks-bl/gray-granite-flecks-albedo.png" id="1_gehjb"]
+[ext_resource type="Texture2D" uid="uid://clxini6kfbay1" path="res://Art/gray-granite-flecks-bl/gray-granite-flecks-Metallic.png" id="2_0jhdi"]
+[ext_resource type="Texture2D" uid="uid://bfnoj60424g2f" path="res://Art/gray-granite-flecks-bl/gray-granite-flecks-Roughness.png" id="3_1xg33"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4nbi"]
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttoca"]
+albedo_color = Color(0.839216, 0.603922, 0.345098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yccox"]
+material = SubResource("StandardMaterial3D_ttoca")
+size = Vector3(2, 2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2wsd"]
+albedo_texture = ExtResource("1_gehjb")
+metallic = 1.0
+metallic_texture = ExtResource("2_0jhdi")
+roughness_texture = ExtResource("3_1xg33")
+
+[node name="Wall" type="Node3D"]
+
+[node name="body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_x4nbi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="body/CollisionShape3D"]
+mesh = SubResource("BoxMesh_yccox")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_w2wsd")
