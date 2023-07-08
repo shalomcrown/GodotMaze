@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnn7o6pcfbpt0"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_3w6sf"]
+[ext_resource type="PackedScene" uid="uid://bav2sylaofjuc" path="res://Art/Models/lab_mouse.glb" id="1_crnne"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ieyi"]
+size = Vector3(0.412207, 0.299446, 1.02438)
+
+[node name="Player" type="CharacterBody3D"]
+editor_description = "\"Lab Mouse\" (https://skfb.ly/owSGT) by Just8 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/)."
+script = ExtResource("1_3w6sf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114232, 0.132803, 0.0535848)
+shape = SubResource("BoxShape3D_8ieyi")
+
+[node name="lab_mouse" parent="." instance=ExtResource("1_crnne")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.0130151, 0, 0.27874)
+
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(-0.999933, 0, -0.0115713, 0.000942298, 0.996679, -0.0814286, 0.0115329, -0.0814341, -0.996612, 0.0104324, 0.330771, 0.190834)

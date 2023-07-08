@@ -11,6 +11,8 @@ enum Direction {EAST, SOUTH, WEST, NORTH}
 @export var entrance_direction: Direction = Direction.WEST
 @export var exit_direction: Direction = Direction.EAST
 
+var linear_velocity = 0
+
 var exit_cell
 var entry_cell
 
@@ -175,18 +177,14 @@ func add_walls():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_walls()
-	$MainCameraPivot.position.x = -$Floor/CollisionShape3D.shape.size.x / 2 + entry_cell.col * cell_width + cell_width / 2
-	$MainCameraPivot.position.z = -$Floor/CollisionShape3D.shape.size.z / 2 + entry_cell.row * cell_height + cell_height / 2
-	$MainCameraPivot/MainCamera.current = true
+	
+	$Player.position.x =  -$Floor/CollisionShape3D.shape.size.x / 2 + entry_cell.col * cell_width + cell_width / 2
+	$Player.position.z =  -$Floor/CollisionShape3D.shape.size.x / 2 + entry_cell.col * cell_width + cell_width / 2
+	$Player/PlayerCamera.current = true
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta):
-	if Input.is_action_just_pressed("ui_right"):
-		$MainCameraPivot.rotate_y(PI / 2)
-	if Input.is_action_just_pressed("ui_left"):
-		$MainCameraPivot.rotate_y(-PI / 2)
-		
-#	if Input.is_action_just_pressed("ui_up"):
-#		$MainCameraPivot.
+	if Input.is_action_just_pressed("ui_home"):
+		$CheatCameraPivot/CheatCamera.current = true
+	if Input.is_action_just_pressed("ui_cancel"):
+		$Player/PlayerCamera.current = true	
